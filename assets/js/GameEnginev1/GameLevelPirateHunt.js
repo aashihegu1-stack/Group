@@ -23,13 +23,13 @@ class GameLevelPirateHunt {
 
         const bgData = {
             name: "custom_bg",
-            src: path + "/images/gamebuilder/bg/Deck.png",
+            src: path + "/images/gamebuilder/bg/Deck.jpg",
             pixels: { height: 700, width: 1280 }
         };
 
-        const playerData = {
+       const playerData = {
             id: 'McArchie',
-            src: path + "/images/gamebuilder/sprites/kirby.png",
+            src: path + "/images/gamebuilder/sprites/mcarchie.png",
             SCALE_FACTOR: 8,
             STEP_FACTOR: 1000,
             ANIMATION_RATE: 30,
@@ -51,7 +51,7 @@ class GameLevelPirateHunt {
         
      const npcData1 = {
             id: 'Captain Blackbread',
-            greeting: 'Shiver me timbers! What a strange creature, how did ye make it onto me ship??',
+            greeting: 'Shiver me timbers! How did ye make it onto me ship??',
             src: path + "/images/gamebuilder/sprites/Pirate.png",
             SCALE_FACTOR: 5,
             ANIMATION_RATE: 1000000008,
