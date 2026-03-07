@@ -23,13 +23,13 @@ class GameLevelPirateHunt {
 
         const bgData = {
             name: "custom_bg",
-            src: path + "/images/gamebuilder/bg/GameBackgroundCoolio.jpg",
+            src: path + "/images/gamebuilder/bg/Deck.png",
             pixels: { height: 700, width: 1280 }
         };
 
         const playerData = {
             id: 'McArchie',
-            src: path + "/images/gamebuilder/sprites/mcarchie.png",
+            src: path + "/images/gamebuilder/sprites/kirby.png",
             SCALE_FACTOR: 8,
             STEP_FACTOR: 1000,
             ANIMATION_RATE: 30,
@@ -51,7 +51,7 @@ class GameLevelPirateHunt {
         
      const npcData1 = {
             id: 'Captain Blackbread',
-            greeting: 'Hoy matey, my name is Captain Blackbeard. I am the most feared pirate on the seven seas. I have a treasure map that leads to a hidden island, but I need someone to help me find it. Are you up for the adventure?',
+            greeting: 'Shiver me timbers! What a strange creature, how did ye make it onto me ship??',
             src: path + "/images/gamebuilder/sprites/Pirate.png",
             SCALE_FACTOR: 5,
             ANIMATION_RATE: 1000000008,
@@ -60,7 +60,7 @@ class GameLevelPirateHunt {
             orientation: { rows: 1, columns: 3 },
             down: { row: 0, start: 0, columns: 3 },
             hitbox: { widthPercentage: 0.1, heightPercentage: 0.01 },
-            dialogues: ['Hey there, Im Blackbread. You seem like a fellow human. I havent seen a human in forever, that horrid barrier forbids it! What do you say, how about we get out of here!'],
+            dialogues: ['Fear not! We will get ye out of here... once we find a way through that pesky barrier!'],
             reaction: function() { if (this.dialogueSystem) { this.showReactionDialogue(); } else { console.log(this.greeting); } },
             interact: function() { if (this.dialogueSystem) { this.showRandomDialogue(); } }
      
