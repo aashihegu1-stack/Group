@@ -16,7 +16,7 @@ permalink: /gamify/NanPirateGame
     import GameLevelWater from "{{site.baseurl}}/assets/js/GameEnginev1/GameLevelSkyMaze.js";
     import { pythonURI, javaURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 
-    const gameLevelClasses = [GameLevelWater];
+    const gameLevelClasses = [GameLevelSkyMaze];
 
     // Web Server Environment data
     const environment = {

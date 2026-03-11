@@ -12,13 +12,13 @@ class GameLevelLevelSkyMaze {
 
         const bgData = {
             name: "custom_bg",
-            src: path + "/images/gamebuilder/bg/clouds.jpg",
+            src: path + "/images/gamebuilder/bg/Deck.jpg",
             pixels: { height: 720, width: 1280 }
         };
 
         const playerData = {
             id: 'playerData',
-            src: path + "/images/gamebuilder/sprites/pew.png",
+            src: path + "/images/gamebuilder/sprites/mcarchie.png",
             SCALE_FACTOR: 5,
             STEP_FACTOR: 1000,
             ANIMATION_RATE: 50,
