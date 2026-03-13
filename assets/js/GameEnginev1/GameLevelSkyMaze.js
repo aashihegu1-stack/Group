@@ -3,7 +3,7 @@ import Player from './essentials/Player.js';
 import Npc from './essentials/Npc.js';
 import Barrier from './essentials/Barrier.js';
 
-class GameLevelSkyMaze {
+class GameLevelPirateHunt {
     constructor(gameEnv) {
 
         const path = gameEnv.path;
@@ -13,7 +13,7 @@ class GameLevelSkyMaze {
         const bgData = {
             name: "custom_bg",
             src: path + "/images/gamebuilder/bg/Deck.jpg",
-            pixels: { height: 720, width: 1280 }
+            pixels: { height: 700, width: 1280 }
         };
 
         const playerData = {
@@ -54,7 +54,7 @@ class GameLevelSkyMaze {
             hitbox: { widthPercentage: 0.4, heightPercentage: 0.6 },
 
             dialogues: [
-                'rUN bEFORE I '
+                'Fear not! We will get ye out of here... once we find where ya came from!'
             ],
 
             reaction: function () {
@@ -72,27 +72,48 @@ class GameLevelSkyMaze {
             }
         };
 
-        const dbarrier_1 = {
-            id: 'dbarrier_1', x: 329, y: 100, width: 127, height: 270, visible: false,
+        const barrier_right = {
+            id: 'barrier_right',
+            x: 1230,
+            y: 76,
+            width: 5,
+            height: 510,
+            visible: true,
             hitbox: { widthPercentage: 0.0, heightPercentage: 0.0 },
             fromOverlay: true
         };
 
-        const dbarrier_2 = {
-            id: 'dbarrier_2', x: 129, y: 4, width: 98, height: 249, visible: false,
+        const barrier_floor = {
+            id: 'barrier_floor',
+            x: 0,
+            y: 620,
+            width: 1280,
+            height: 10,
+            visible: true,
             hitbox: { widthPercentage: 0.0, heightPercentage: 0.0 },
             fromOverlay: true
         };
-this.classes = [      
-      { class: GameEnvBackground, data: bgData },
-      { class: Player, data: playerData },
-      { class: Npc, data: npcData1 },
-      { class: Barrier, data: dbarrier_1 },
-      { class: Barrier, data: dbarrier_2 }
-];
 
-        
+        const barrier_hole = {
+            id: 'barrier_hole',
+            x: 520,
+            y: 620,
+            width: 250,
+            height: 50,
+            visible: true,
+            hitbox: { widthPercentage: 0.0, heightPercentage: 0.0 },
+            fromOverlay: true
+        };
+
+        this.classes = [
+            { class: GameEnvBackground, data: bgData },
+            { class: Player, data: playerData },
+            { class: Npc, data: npcData1 },
+            { class: Barrier, data: barrier_right },
+            { class: Barrier, data: barrier_floor },
+            { class: Barrier, data: barrier_hole }
+        ];
     }
 }
 
-export default GameLevelSkyMaze;
+export default GameLevelPirateHunt;
