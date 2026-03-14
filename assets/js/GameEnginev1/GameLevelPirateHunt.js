@@ -42,9 +42,9 @@ class GameLevelPirateHunt {
         /* ---------------- NPC 1 ---------------- */
 
         const npcData1 = {
-            id: 'Captain Hook',
-            greeting: 'Shiver me timbers! How did ye make it onto me ship??',
-            src: path + "/images/gamebuilder/sprites/Hook.png",
+            id: 'Gold bar',
+            greeting: 'A gold bar...',
+            src: path + "/images/gamebuilder/sprites/gold.png",
 
             SCALE_FACTOR: 4,
             ANIMATION_RATE: 1000000008,
@@ -57,17 +57,16 @@ class GameLevelPirateHunt {
             hitbox: { widthPercentage: 0.4, heightPercentage: 0.6 },
 
             dialogues: [
-                "Shiver me timbers! Ye shouldn't be here!",
-                "This ship be cursed with treasure..."
+                "You took the gold bar!",
             ]
         };
 
         /* ---------------- NPC 2 ---------------- */
 
         const npcData2 = {
-            id: 'First Mate',
-            greeting: 'Ahoy sailor!',
-            src: path + "/images/gamebuilder/sprites/pirate.png",
+            id: 'Chest',
+            greeting: 'A treasure chest...',
+            src: path + "/images/gamebuilder/sprites/chest.png",
 
             SCALE_FACTOR: 4,
             ANIMATION_RATE: 1000000008,
@@ -80,17 +79,16 @@ class GameLevelPirateHunt {
             hitbox: { widthPercentage: 0.4, heightPercentage: 0.6 },
 
             dialogues: [
-                "The captain guards the treasure closely.",
-                "Be careful wandering this ship..."
+                "You took the treasure chest!",
             ]
         };
 
         /* ---------------- NPC 3 ---------------- */
 
         const npcData3 = {
-            id: 'Navigator',
+            id: 'Map',
             greeting: 'Lost at sea?',
-            src: path + "/images/gamebuilder/sprites/pirate.png",
+            src: path + "/images/gamebuilder/sprites/map.png",
 
             SCALE_FACTOR: 4,
             ANIMATION_RATE: 1000000008,
@@ -103,17 +101,16 @@ class GameLevelPirateHunt {
             hitbox: { widthPercentage: 0.4, heightPercentage: 0.6 },
 
             dialogues: [
-                "I chart the seas...",
-                "But this place isn't on any map."
+                "You took the map!",
             ]
         };
 
         /* ---------------- NPC 4 ---------------- */
 
         const npcData4 = {
-            id: 'Deckhand',
-            greeting: 'Working hard!',
-            src: path + "/images/gamebuilder/sprites/pirate.png",
+            id: 'ruby',
+            greeting: 'A ruby...',
+            src: path + "/images/gamebuilder/sprites/ruby.png",
 
             SCALE_FACTOR: 4,
             ANIMATION_RATE: 1000000008,
@@ -126,8 +123,7 @@ class GameLevelPirateHunt {
             hitbox: { widthPercentage: 0.4, heightPercentage: 0.6 },
 
             dialogues: [
-                "I scrub the decks all day.",
-                "Treasure rumors keep the crew here..."
+                "You took the ruby!",
             ]
         };
 
