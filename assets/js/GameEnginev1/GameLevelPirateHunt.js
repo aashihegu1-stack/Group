@@ -5,19 +5,18 @@ import Npc from './essentials/Npc.js';
 class GameLevelPirateHunt {
     constructor(gameEnv) {
 
-        const path = gameEnv.path;
         const width = gameEnv.innerWidth;
         const height = gameEnv.innerHeight;
 
         const bgData = {
             name: "custom_bg",
-            src: path + "/images/gamebuilder/bg/ship.jpg",
+            src: "./images/gamebuilder/bg/ship.jpg",
             pixels: { height: 700, width: 1280 }
         };
 
         const playerData = {
             id: 'lost sailor',
-            src: path + "/images/gamebuilder/sprites/mcarchie.png",
+            src: "./images/gamebuilder/sprites/mcarchie.png",
             SCALE_FACTOR: 8,
             STEP_FACTOR: 1000,
             ANIMATION_RATE: 30,
@@ -44,7 +43,7 @@ class GameLevelPirateHunt {
         const npcData1 = {
             id: 'Gold bar',
             greeting: 'A gold bar...',
-            src: path + "/images/gamebuilder/sprites/gold.png",
+            src: "./images/gamebuilder/sprites/gold.png",
 
             SCALE_FACTOR: 4,
             ANIMATION_RATE: 1000000008,
@@ -66,7 +65,7 @@ class GameLevelPirateHunt {
         const npcData2 = {
             id: 'Chest',
             greeting: 'A treasure chest...',
-            src: path + "/images/gamebuilder/sprites/chest.png",
+            src: "./images/gamebuilder/sprites/chest.png",
 
             SCALE_FACTOR: 4,
             ANIMATION_RATE: 1000000008,
@@ -88,7 +87,7 @@ class GameLevelPirateHunt {
         const npcData3 = {
             id: 'Map',
             greeting: 'Lost at sea?',
-            src: path + "/images/gamebuilder/sprites/map.png",
+            src: "./images/gamebuilder/sprites/map.png",
 
             SCALE_FACTOR: 4,
             ANIMATION_RATE: 1000000008,
@@ -110,7 +109,7 @@ class GameLevelPirateHunt {
         const npcData4 = {
             id: 'ruby',
             greeting: 'A ruby...',
-            src: path + "/images/gamebuilder/sprites/ruby.png",
+            src: "./images/gamebuilder/sprites/ruby.png",
 
             SCALE_FACTOR: 4,
             ANIMATION_RATE: 1000000008,
