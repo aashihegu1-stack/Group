@@ -10,7 +10,7 @@ class GameLevelPirateHunt {
 
         const bgData = {
             name: "custom_bg",
-            src: "./images/gamebuilder/bg/ship.jpg",
+            src: "./images/gamebuilder/bg/ship.png",
             pixels: { height: 700, width: 1280 }
         };
 
@@ -86,7 +86,7 @@ class GameLevelPirateHunt {
 
         const npcData3 = {
             id: 'Map',
-            greeting: 'Lost at sea?',
+            greeting: 'A map...',
             src: "./images/gamebuilder/sprites/map.png",
 
             SCALE_FACTOR: 4,
