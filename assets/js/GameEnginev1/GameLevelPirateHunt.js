@@ -10,7 +10,7 @@ class GameLevelPirateHunt {
 
         const bgData = {
             name: "custom_bg",
-            src: "./images/gamebuilder/bg/ship.png",
+            src: "./images/gamebuilder/bg/ship.jpg",
             pixels: { height: 700, width: 1280 }
         };
 
