@@ -1,7 +1,7 @@
 ---
 layout: opencs
-title: Pirate Boss Fight
-permalink: /gamify/PirateBoss
+title: RPG pokemon
+permalink: /gamify/Pokemon
 ---
 
 <div id="gameContainer">
@@ -12,19 +12,21 @@ permalink: /gamify/PirateBoss
 <script type="module">
     import Core from "{{site.baseurl}}/assets/js/GameEnginev1/essentials/Game.js";
     import GameControl from "{{site.baseurl}}/assets/js/GameEnginev1/essentials/GameControl.js";
-    import GameLevelPirateBoss from "{{site.baseurl}}assets/js/GameEnginev1/GameLevelPirateBoss.js";
+    import GameLevelPokemonBattle from "{{site.baseurl}}assets/js/GameEnginev1/GameLevelPokemonBattle.js";
     import { pythonURI, javaURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 
-    const gameLevelClasses = [GameLevelPirateBoss];
+    const gameLevelClasses = [GameLevelPokemon];
 
+    // Web Server Environment data
     const environment = {
-        path: "{{site.baseurl}}",
+        path:"{{site.baseurl}}",
         pythonURI: pythonURI,
         javaURI: javaURI,
         fetchOptions: fetchOptions,
         gameContainer: document.getElementById("gameContainer"),
         gameLevelClasses: gameLevelClasses
-    }
 
+    }
+    // Launch Adventure Game using the central core and adventure GameControl
     Core.main(environment, GameControl);
 </script>
