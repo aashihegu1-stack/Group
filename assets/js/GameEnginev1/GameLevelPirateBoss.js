@@ -5,6 +5,7 @@ import Npc from './essentials/Npc.js';
 
 // ── Boss character — mirrors Wolf from level2.js exactly ─────────────────────
 class BlackbreadBoss extends Character {
+    // Chains the parent Character constructor and initializes boss-specific properties like velocity, patrol angle, and cannonball array
     constructor(data, gameEnv) {
         super(data, gameEnv);
         this.velocity    = { x: 0, y: 0 };
@@ -15,6 +16,7 @@ class BlackbreadBoss extends Character {
         this.cannonballs = [];
     }
 
+    // Overrides Character.update() — moves the boss in an orbital patrol and fires cannonballs at the player each cycle
     update() {
         const W = this.gameEnv.innerWidth;
         const H = this.gameEnv.innerHeight;
@@ -36,6 +38,7 @@ class BlackbreadBoss extends Character {
         this.draw();
     }
 
+    // Finds the player and launches a cannonball toward them using normalized velocity vectors
     _fire() {
         let player = null;
         this.gameEnv.gameObjects?.forEach(o => {
@@ -54,6 +57,7 @@ class BlackbreadBoss extends Character {
         this.cannonballs.push({ x: bx, y: by, vx: dx / mag * spd, vy: dy / mag * spd, life: 140, r: 9 });
     }
 
+    // Updates cannonball positions each frame, removes expired ones, and renders them on the canvas with a trail effect
     _tickCannonballs() {
         const ctx = this.gameEnv.ctx;
         const W   = this.gameEnv.innerWidth;
@@ -83,6 +87,7 @@ class BlackbreadBoss extends Character {
 
 // ── Level class ───────────────────────────────────────────────────────────────
 class GameLevelPirateBoss {
+    // Sets up the boss fight level: initializes HP bars, HUD elements, sprite configs, and game objects array
     constructor(gameEnv) {
         const width  = gameEnv.innerWidth;
         const height = gameEnv.innerHeight;
@@ -266,10 +271,12 @@ class GameLevelPirateBoss {
 
     // ── helpers ──────────────────────────────────────────────────────────────
 
+    // Returns true if two axis-aligned bounding boxes overlap (AABB collision detection)
     _overlap(ax, ay, aw, ah, bx, by, bw, bh) {
         return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
     }
 
+    // Clamps player HP within valid range and updates the player HP bar color and text in the HUD
     _setPlayerHp(hp) {
         this.playerHp = Math.max(0, Math.min(this.playerMaxHp, hp));
         const pct  = this.playerHp / this.playerMaxHp * 100;
@@ -282,6 +289,7 @@ class GameLevelPirateBoss {
         if (txt) txt.textContent = Math.round(this.playerHp) + ' / ' + this.playerMaxHp;
     }
 
+    // Clamps boss HP, updates the boss HP bar fill color based on current phase, and displays phase label
     _setBossHp(hp) {
         this.bossHp = Math.max(0, hp);
         const pct  = this.bossHp / this.bossMaxHp * 100;
@@ -300,6 +308,7 @@ class GameLevelPirateBoss {
             this.bossPhase === 2 ? 'Phase II — Aggressive' : 'Phase I';
     }
 
+    // Displays a temporary phase-transition message overlay that fades out after 2.2 seconds
     _flash(msg) {
         const el = document.getElementById('boss-flash');
         if (!el) return;
@@ -309,6 +318,7 @@ class GameLevelPirateBoss {
         this._flashTimer = setTimeout(() => { el.style.opacity = '0'; }, 2200);
     }
 
+    // Shows a victory or defeat popup with themed HTML content and a close button
     _showResult(won) {
         this.wonGame = true;
         const popup = document.getElementById('boss-popup');
@@ -336,7 +346,7 @@ class GameLevelPirateBoss {
         };
     }
 
-    // ── main update called every frame by the engine ──────────────────────────
+    // Main game loop method called every frame — handles phase transitions, player attacks, and cannonball-player collision
     update() {
         if (!this.gameEnv?.gameObjects || this.wonGame) return;
 
@@ -407,9 +417,12 @@ class GameLevelPirateBoss {
         }
     }
 
+    // Placeholder for canvas draw — rendering is handled by individual game objects
     draw()   {}
+    // Placeholder for window resize — layout adjusts automatically via CSS
     resize() {}
 
+    // Cleans up all HUD elements from the DOM and removes the global sword flag
     destroy() {
         ['boss-hud', 'player-hud', 'boss-hint', 'boss-flash', 'boss-popup'].forEach(id => {
             document.getElementById(id)?.remove();
