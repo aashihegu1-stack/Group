@@ -115,7 +115,6 @@ class GameLevelPirateBoss {
 
      
         this.box = { x: 0, y: 0, w: 240, h: 200 };
-
        
         this.canvas = document.createElement('canvas');
         this.canvas.id = 'ut-battle-canvas';
