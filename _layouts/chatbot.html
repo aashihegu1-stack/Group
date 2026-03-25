@@ -334,6 +334,7 @@ layout: cs-portfolio-lesson
     // Fetch user credentials
     async function getCredentials() {
         try {
+<<<<<<< HEAD
             const res = await fetch(`${pythonURI}/api/id`, {
                 ...fetchOptions,
                 method: "GET",
@@ -341,6 +342,9 @@ layout: cs-portfolio-lesson
                     "Content-Type": "application/json"
                 },
             });
+=======
+            const res = await fetch(`${pythonURI}/api/id`, fetchOptions );
+>>>>>>> upstream/main
 
             if (res.ok) {
                 const data = await res.json();
@@ -359,6 +363,7 @@ layout: cs-portfolio-lesson
     async function getLessonData() {
         const username = await getCredentials();
         try {
+<<<<<<< HEAD
             const res = await fetch(`${javaURI}/api/stats`, {
                 ...fetchOptions,
                 method: "GET",
@@ -366,6 +371,9 @@ layout: cs-portfolio-lesson
                     "Content-Type": "application/json"
                 },
             });
+=======
+            const res = await fetch(`${javaURI}/api/stats`, fetchOptions );
+>>>>>>> upstream/main
 
             if (!res.ok) {
                 console.log(`Request failed with status ${res.status}`);
@@ -497,10 +505,15 @@ Your name is Analytics Guide Bot. Be helpful and make analytics easy to understa
 
         try {
             const response = await fetch(apiUrl, {
+<<<<<<< HEAD
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
+=======
+                ...fetchOptions,
+                method: 'POST',
+>>>>>>> upstream/main
                 body: JSON.stringify({
                     contents: [{
                         parts: [{ text: `${systemPrompt}\n\nUser question: ${userMessage}` }]

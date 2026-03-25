@@ -1,5 +1,6 @@
 # filepath: _data/tools_questions.yml
 questions:
+<<<<<<< HEAD
   - id: "tools-familiarity"
     title: "Tools Familiarity"
     question: "What are the key tools in the infographic? List its purpose in your own words."
@@ -15,3 +16,14 @@ questions:
   - id: "tools-vscode-make"
     title: "VSCode"
     question: "Capture text output of your VSCode make with a link to the localhost IP address. Why do you think it is correct?"
+=======
+  - id: "tools-setup-issue"
+    title: "Track Your Tool Setup with a GitHub Issue"
+    question: |
+      Create a GitHub Issue in your personal repository to log your tool setup progress. Use this space to log daily success and progress.
+
+  - id: "tools-setup-time"
+    title: "Log and Reflect on Your Setup Time"
+    question: |
+      Estimate how long it took you to set up your tools today (in minutes). Use this space to form thoughts on time and things that are confusing.
+>>>>>>> upstream/main

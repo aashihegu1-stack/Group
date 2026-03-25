@@ -1,0 +1,46 @@
+# Poway Symphony Orchestra Capstone Infographic
+Badge: "Design-Based Research Capstone"
+Title: "Poway Symphony Orchestra - Expanding Community Through Music"
+Description: "A design-research capstone focused on enhancing the digital presence, audience engagement, and accessibility of a community orchestra through a modern, user-centered website experience."
+
+Topics:
+  - title: "Poway Symphony Orchestra - Connecting Community Through Live Music"
+    image: "pso_logo.png"
+    link: "https://wi-fighters-csp.github.io/wi-pages/capstone/powayorchestra/"
+    alt: "Poway Symphony Orchestra"
+    buttonLabel: "View Project"
+    keyPoints:
+      - "Modern, accessible website redesign for improved user experience"
+      - "Clear navigation for concerts, donations, and musician information"
+      - "Engaging homepage showcasing upcoming performances and highlights"
+      - "Mobile-friendly and responsive design across devices"
+      - "Streamlined ticketing and donation flow"
+      - "Visual storytelling of orchestra members and conductor"
+      - "Enhanced accessibility for all age groups and technical skill levels"
+    subtitle: "Research and Testing Phase"
+    description: "The Poway Symphony Orchestra is a community-based ensemble dedicated to bringing high-quality orchestral music to local audiences. This capstone explores how intentional design can elevate the orchestra's online experience, making it easier for users to discover concerts, connect with the musicians, and support the organization. Through user research and design iteration, the project emphasizes clarity, accessibility, and storytelling so the site does more than present information. It invites people into the world of the orchestra and makes participation feel welcoming, useful, and memorable."
+    tech:
+      - "HTML"
+      - "CSS"
+      - "JavaScript"
+      - "Responsive Web Design"
+      - "UX/UI Design Principles"
+      - "WCAG Accessibility Standards"
+      - "Figma"
+      - "Analytics and User Behavior Tracking"
+      - "Content Management Strategy"
+    impact:
+      - "Increased engagement with concert information and event pages"
+      - "Improved navigation and reduced friction for donate, attend, and learn actions"
+      - "Stronger emotional connection through visual storytelling and media"
+      - "Higher accessibility for diverse audiences, including older users"
+      - "Increased likelihood of return visits and ongoing community involvement"
+      - "Clearer communication of the orchestra's mission and value"
+    status: "Research and Testing Phase"
+    team:
+      - "Wi-Fighters"
+      - "Meryl"
+      - "Kailyn"
+      - "Hope"
+      - "Laya"
+      

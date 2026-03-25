@@ -22,4 +22,44 @@ _notebooks/CSP/big-ideas/big-idea-3-part-1-fundamentals/Period3/2024-9-27-fundam
 .bundle
 vendor/*
 package-lock.json
+<<<<<<< HEAD
 .jekyll-metadata
+=======
+private/
+.jekyll-metadata
+ijava/
+ijava-1.3.0.zip
+ijava.zip
+channel.json
+/IJava
+
+# DOCX conversion intermediate files
+images/docx/*.png
+images/docx/*.jpg
+images/docx/*.jpeg
+images/docx/*.gif
+images/docx/*.bmp
+images/docx/*.tiff
+docx-index.md
+# Converted DOCX posts (auto-generated)
+_posts/**/*_DOCX_.md
+# Temporary DOCX files
+_docx/~$*
+*.tmp
+
+# Auto-generated course-specific files (build-time only)
+_posts/**/*_csp.md
+_posts/**/*_csa.md
+_posts/**/*_csse.md
+_posts/**/*_cwgu.md
+_posts/**/*_content.md
+_notebooks/**/*_csp.ipynb
+_notebooks/**/*_csa.ipynb
+_notebooks/**/*_csse.ipynb
+_notebooks/**/*_cwgu.ipynb
+_notebooks/**/*_csp.md
+_notebooks/**/*_csa.md
+_notebooks/**/*_csse.md
+_notebooks/**/*_cwgu.md
+_notebooks/**/*_content.md
+>>>>>>> upstream/main

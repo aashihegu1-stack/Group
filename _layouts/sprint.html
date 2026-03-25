@@ -61,6 +61,7 @@ layout: post
                   <div class="date-preview-loading">Loading calendar dates...</div>
                 </div>
               </div>
+<<<<<<< HEAD
               <div class="sync-options">
                 <label class="sync-option">
                   <input type="checkbox" class="sync-reading-materials" data-sprint="{{ unitKey }}" checked>
@@ -108,6 +109,14 @@ layout: post
                 </button>
                 <button class="advanced-remove-btn" data-sprint="{{ unitKey }}" data-course="{{ page.course }}" data-start-week="{{ start }}" data-end-week="{{ end }}">
                   <i class="fas fa-list-check"></i> Advanced Remove
+=======
+              <div class="date-actions">
+                <button class="advanced-sync-btn" data-sprint="{{ unitKey }}" data-course="{{ page.course }}" data-start-week="{{ start }}" data-end-week="{{ end }}">
+                  <i class="fas fa-sync"></i> Sync to Calendar
+                </button>
+                <button class="advanced-remove-btn" data-sprint="{{ unitKey }}" data-course="{{ page.course }}" data-start-week="{{ start }}" data-end-week="{{ end }}">
+                  <i class="fas fa-trash-alt"></i> Remove from Calendar
+>>>>>>> upstream/main
                 </button>
               </div>
               <p class="sprint-date-status" data-sprint="{{ unitKey }}"></p>
@@ -221,7 +230,11 @@ layout: post
                         {% assign itemType = "lesson" %}
                       {% endif %}
 
+<<<<<<< HEAD
                       <div class="item-card" data-type="{{ itemType }}" data-item-id="{{ parts[1] }}">
+=======
+                      <div class="item-card" data-type="{{ itemType }}" data-item-id="{{ parts[1] }}" data-title="{{ parts[0] }}">
+>>>>>>> upstream/main
                         <div class="item-content">
                           <button class="completion-toggle">
                             <i class="fas fa-circle status-icon incomplete"></i>
@@ -234,6 +247,17 @@ layout: post
                             {% endif %}
                             <span class="item-title">{{ parts[0] }}</span>
                           </a>
+<<<<<<< HEAD
+=======
+                          <div class="item-priority-selector">
+                            <select class="item-priority-dropdown" data-item-url="{{ parts[1] }}">
+                              <option value="P3">P3</option>
+                              <option value="P2" selected>P2</option>
+                              <option value="P1">P1</option>
+                              <option value="P0">P0</option>
+                            </select>
+                          </div>
+>>>>>>> upstream/main
                         </div>
                       </div>
                     {% endfor %}
@@ -314,7 +338,12 @@ layout: post
           <img id="certificate-logo" src="{{ '/assets/images/ocs-logo.png' | relative_url }}" alt="Open Coding Society Logo">
         </div>
         <div class="header-text">Open Coding Society</div>
+<<<<<<< HEAD
         <div class="certify-text">Certificate of Completion</div>
+=======
+        <div id="certificate-type-text" class="certify-text">Certificate of Completion</div>
+        <div id="certificate-score-display" style="margin-top: 5px; font-size: 1.1rem; color: #4b5563;"></div>
+>>>>>>> upstream/main
         <div class="certificate-subtitle">Presented to</div>
       </div>
 
@@ -516,6 +545,85 @@ layout: post
     
     updateProgressBars();
   }
+<<<<<<< HEAD
+=======
+
+  // ===========================
+  // ITEM PRIORITY SYSTEM
+  // ===========================
+  
+  const ITEM_PRIORITY_KEY = `item_priorities_${window.location.pathname}`;
+  
+  // Load item priorities from localStorage
+  function loadItemPriorities() {
+    try {
+      const stored = localStorage.getItem(ITEM_PRIORITY_KEY);
+      return stored ? JSON.parse(stored) : {};
+    } catch (e) {
+      console.error('Error loading item priorities:', e);
+      return {};
+    }
+  }
+  
+  // Save item priorities to localStorage
+  function saveItemPriorities(data) {
+    try {
+      localStorage.setItem(ITEM_PRIORITY_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.error('Error saving item priorities:', e);
+    }
+  }
+  
+  // Update dropdown styling based on priority
+  function updatePriorityDropdownStyle(dropdown) {
+    const value = dropdown.value.toLowerCase();
+    dropdown.classList.remove('priority-p0', 'priority-p1', 'priority-p2', 'priority-p3');
+    dropdown.classList.add(`priority-${value}`);
+  }
+  
+  // Get item priority (for use by calendar sync)
+  function getItemPriority(itemUrl) {
+    const priorities = loadItemPriorities();
+    return priorities[itemUrl] || 'P2';
+  }
+  
+  // Initialize item priority dropdowns
+  function initializeItemPriorities() {
+    const priorities = loadItemPriorities();
+    const dropdowns = document.querySelectorAll('.item-priority-dropdown');
+    
+    dropdowns.forEach(dropdown => {
+      const itemUrl = dropdown.dataset.itemUrl;
+      
+      // Load saved priority or default to P2
+      const savedPriority = priorities[itemUrl] || 'P2';
+      dropdown.value = savedPriority;
+      updatePriorityDropdownStyle(dropdown);
+      
+      // Add change listener
+      dropdown.addEventListener('change', function(e) {
+        e.stopPropagation();
+        const newPriority = this.value;
+        const itemUrl = this.dataset.itemUrl;
+        
+        // Save to localStorage
+        const currentPriorities = loadItemPriorities();
+        currentPriorities[itemUrl] = newPriority;
+        saveItemPriorities(currentPriorities);
+        
+        // Update styling
+        updatePriorityDropdownStyle(this);
+        
+        console.log(`Item priority updated: ${itemUrl} → ${newPriority}`);
+      });
+      
+      // Prevent click propagation so dropdown works
+      dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    });
+  }
+>>>>>>> upstream/main
   
   // Filter functionality - per sprint
   function applySprintFilters(sprintKey, filterType) {
@@ -855,8 +963,103 @@ layout: post
     }
   }
 
+<<<<<<< HEAD
   // Open certificate for sprint (directly show the certificate, no list needed)
   function openCertificateListModal(sprintKey, startWeek, endWeek) {
+=======
+  // Show certificate notification toast
+  function showCertificateNotification(type, title, message) {
+    // Remove existing notification if any
+    const existing = document.querySelector('.cert-notification');
+    if (existing) existing.remove();
+
+    const notification = document.createElement('div');
+    notification.className = `cert-notification cert-notification-${type}`;
+    
+    const icons = {
+      success: '🎉',
+      warning: '⚠️',
+      error: '❌',
+      info: 'ℹ️'
+    };
+    
+    notification.innerHTML = `
+      <div class="cert-notification-icon">${icons[type] || icons.info}</div>
+      <div class="cert-notification-content">
+        <div class="cert-notification-title">${title}</div>
+        <div class="cert-notification-message">${message}</div>
+      </div>
+      <button class="cert-notification-close">&times;</button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+      notification.classList.add('cert-notification-visible');
+    });
+    
+    // Close button handler
+    notification.querySelector('.cert-notification-close').addEventListener('click', () => {
+      notification.classList.remove('cert-notification-visible');
+      setTimeout(() => notification.remove(), 300);
+    });
+    
+    // Auto-dismiss after 5 seconds for success/info
+    if (type === 'success' || type === 'info') {
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.classList.remove('cert-notification-visible');
+          setTimeout(() => notification.remove(), 300);
+        }
+      }, 5000);
+    }
+  }
+
+  // Function to request certificate from backend
+  async function requestCertificate(sprintKey, formative, summative) {
+    try {
+      const configModule = await import('{{ site.baseurl }}/assets/js/api/config.js');
+      const { javaURI, fetchOptions } = configModule;
+      
+      // Fine-tune: Convert "Sprint1" to "Sprint 1" and extract ID
+      const sprintNumber = sprintKey.replace('Sprint', '');
+      const formattedSprintName = `Sprint ${sprintNumber}`;
+      const certId = parseInt(sprintNumber) || 1; // Sprint 1 -> ID 1, etc.
+
+      const payload = {
+        formativeAssignments: formative,
+        summativeAssignments: summative,
+        sprintName: formattedSprintName,
+        certificateId: certId 
+      };
+
+      console.log('Sending Certificate Request:', payload);
+
+      const response = await fetch(`${javaURI}/api/user-certificates/request`, {
+        ...fetchOptions,
+        method: 'POST',
+        headers: {
+          ...fetchOptions.headers,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error requesting certificate:', error);
+      return { status: 'ERROR', message: error.message };
+    }
+  }
+
+  // Open certificate for sprint (directly show the certificate, no list needed)
+  async function openCertificateListModal(sprintKey, startWeek, endWeek) {
+>>>>>>> upstream/main
     const sprintCard = document.querySelector(`.sprint-card[data-sprint="${sprintKey}"]`);
     if (!sprintCard) {
       console.error('Sprint card not found');
@@ -869,6 +1072,11 @@ layout: post
     // Check if sprint is complete
     let totalTasks = 0;
     let completedTasks = 0;
+<<<<<<< HEAD
+=======
+    const formative = [];
+    const summative = [];
+>>>>>>> upstream/main
     const allGoals = [];
     
     for (let weekNum = startWeek; weekNum <= endWeek; weekNum++) {
@@ -883,10 +1091,24 @@ layout: post
           if (card.classList.contains('completed')) {
             completedTasks++;
           }
+<<<<<<< HEAD
           // Collect unique task titles as goals
           const taskTitle = card.querySelector('.item-title')?.textContent.trim();
           if (taskTitle && !allGoals.includes(taskTitle)) {
             allGoals.push(taskTitle);
+=======
+          // Collect unique task titles
+          const taskTitle = card.querySelector('.item-title')?.textContent.trim();
+          const itemType = card.dataset.type; // "lesson" (formative) or "assignment" (summative)
+          
+          if (taskTitle) {
+            if (itemType === 'lesson') {
+              if (!formative.includes(taskTitle)) formative.push(taskTitle);
+            } else {
+              if (!summative.includes(taskTitle)) summative.push(taskTitle);
+            }
+            if (!allGoals.includes(taskTitle)) allGoals.push(taskTitle);
+>>>>>>> upstream/main
           }
         });
       }
@@ -898,10 +1120,63 @@ layout: post
       alert('Please complete all tasks in this sprint to unlock the certificate.');
       return;
     }
+<<<<<<< HEAD
+=======
+
+    // Show loading state with spinner
+    const viewBtn = document.getElementById('view-certificate-btn');
+    const originalText = viewBtn ? viewBtn.textContent : 'View Your Certificate';
+    if (viewBtn) {
+      viewBtn.disabled = true;
+      viewBtn.innerHTML = '<span class="cert-spinner"></span> Verifying...';
+      viewBtn.classList.add('cert-btn-loading');
+    }
+
+    // Request from backend
+    const result = await requestCertificate(sprintKey, formative, summative);
+    
+    if (viewBtn) {
+      viewBtn.disabled = false;
+      viewBtn.innerHTML = originalText;
+      viewBtn.classList.remove('cert-btn-loading');
+    }
+
+    // Handle different responses with improved notifications
+    switch (result.status) {
+      case 'INCOMPLETE':
+        showCertificateNotification('warning', 'Missing Grades', `You are missing grades for: ${result.missingAssignments.join(', ')}`);
+        return;
+      case 'NOT_QUALIFIED':
+        showCertificateNotification('error', 'Score Below Minimum', `Your average score (${result.averageScore}%) is below the required ${result.requiredMinimum}%. Keep working to improve!`);
+        return;
+      case 'ALREADY_EARNED':
+        console.log(`User already has ${result.existingType} certificate.`);
+        // Proceed to show existing one
+        break;
+      case 'UPGRADED':
+        showCertificateNotification('success', 'Certificate Upgraded!', `Congratulations! You improved to ${result.averageScore}% and earned an EXCELLENCE certificate!`);
+        break;
+      case 'AWARDED':
+        const awardType = result.certificateType === 'EXCELLENCE' ? 'Excellence' : 'Completion';
+        showCertificateNotification('success', `${awardType} Certificate Earned!`, `Your average score: ${result.averageScore}%`);
+        break;
+      case 'ERROR':
+        showCertificateNotification('error', 'Connection Error', result.message || 'Unable to verify certificate. Please try again.');
+        return;
+      default:
+        console.log('Unexpected status:', result.status);
+    }
+
+    // Determine certificate type for display (Use existingType if ALREADY_EARNED)
+    const backendCertType = result.status === 'ALREADY_EARNED' ? result.existingType : result.certificateType;
+    const certTypeLabel = backendCertType === 'EXCELLENCE' ? 'Excellence' : 'Completion';
+    const displayTheme = `${sprintTitle} (${certTypeLabel})`;
+>>>>>>> upstream/main
     
     // Create sprint-level certificate profile
     const certificateProfile = {
       sprintKey: sprintKey,
+<<<<<<< HEAD
       theme: sprintTitle,
       displayName: sprintTitle,
       courseName: COURSE_LABELS[CURRENT_COURSE] || CURRENT_COURSE,
@@ -909,6 +1184,17 @@ layout: post
       goals: allGoals.slice(0, 6), // Limit to first 6 goals for display
       weekRange: `Weeks ${startWeek}-${endWeek}`,
       description: sprintDescription
+=======
+      theme: displayTheme,
+      displayName: displayTheme,
+      courseName: COURSE_LABELS[CURRENT_COURSE] || CURRENT_COURSE,
+      goal: `${certTypeLabel} in ${sprintTitle}`,
+      goals: allGoals.slice(0, 6), 
+      weekRange: `Weeks ${startWeek}-${endWeek}`,
+      description: sprintDescription,
+      averageScore: result.averageScore || result.score, // Handle both payload versions
+      certType: backendCertType
+>>>>>>> upstream/main
     };
     
     // Open certificate modal directly
@@ -1005,6 +1291,31 @@ layout: post
     document.getElementById('certificate-week-theme').textContent = profile.theme;
     document.getElementById('certificate-course-name').textContent = profile.courseName;
 
+<<<<<<< HEAD
+=======
+    // Set type and score if available
+    const typeText = document.getElementById('certificate-type-text');
+    const scoreDisplay = document.getElementById('certificate-score-display');
+    const content = document.getElementById('certificate-content');
+
+    if (typeText) {
+      typeText.textContent = profile.certType === 'EXCELLENCE' ? 'Certificate of Excellence' : 'Certificate of Completion';
+    }
+
+    if (scoreDisplay) {
+      scoreDisplay.textContent = profile.averageScore ? `Average Score: ${profile.averageScore}%` : '';
+    }
+
+    // Apply special styling for Excellence
+    if (content) {
+      if (profile.certType === 'EXCELLENCE') {
+        content.classList.add('excellence-theme');
+      } else {
+        content.classList.remove('excellence-theme');
+      }
+    }
+
+>>>>>>> upstream/main
     // Set date
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -1250,6 +1561,10 @@ layout: post
   document.addEventListener('DOMContentLoaded', function() {
     initializeProgressBars();
     initializeCompletion();
+<<<<<<< HEAD
+=======
+    initializeItemPriorities();
+>>>>>>> upstream/main
     initializeSprintFilters();
     initializeCertificateSystem();
     renderWeekGoalPreviews();

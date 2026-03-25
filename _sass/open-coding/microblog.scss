@@ -108,6 +108,7 @@
   margin-top: 0.25rem;
 }
 
+<<<<<<< HEAD
 /* Inbox-specific text inputs for title and link labels */
 .inbox-panel--compact .microblog-form input[type="text"],
 .inbox-panel--compact .microblog-form input[type="url"] {
@@ -116,6 +117,8 @@
   border: 1px solid rgba(255,255,255,0.06);
 }
 
+=======
+>>>>>>> upstream/main
 .microblog-form textarea {
   display: block;
   width: 100%;
@@ -163,6 +166,7 @@
   background: #475569;
 }
 
+<<<<<<< HEAD
 /* Override button styles inside inbox forms for Remove and Clear buttons */
 .inbox-panel--compact .microblog-form .microblog-btn-cancel {
   background: #2563eb;
@@ -190,6 +194,11 @@
 /* Floating Action Button */
 
 /* Container that holds the microblog FAB and the inbox FAB so they sit adjacent */
+=======
+/* Floating Action Button */
+
+/* Container that holds the microblog FAB */
+>>>>>>> upstream/main
 .micro-actions-wrapper {
   position: fixed;
   top: 5rem;
@@ -227,6 +236,7 @@
   .microblog-fab { font-size: 1.2rem; min-width: 56px; height: var(--fab-size,56px); }
 }
 
+<<<<<<< HEAD
 /* Small Inbox FAB - sits to the left of the main microblog FAB */
 .inbox-fab {
   background: #10b981;
@@ -381,6 +391,8 @@
   background: rgba(255,255,255,0.04);
 }
 
+=======
+>>>>>>> upstream/main
 /* Side Panel */
 .microblog-panel {
   background: var(--green-bg);
@@ -535,6 +547,7 @@
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 /* Unread indicator for messages in the inbox */
 .inbox-message.unread {
   border-left: 3px solid #ef4444;
@@ -552,6 +565,8 @@
   flex-shrink: 0;
 }
 
+=======
+>>>>>>> upstream/main
 .guest-submit-btn {
   background: #2563eb;
   color: #fff;

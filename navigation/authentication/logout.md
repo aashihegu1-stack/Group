@@ -2,7 +2,11 @@
 layout: opencs
 title: Logout
 permalink: /logout
+<<<<<<< HEAD
 search_exclude: True
+=======
+search_exclude: true
+>>>>>>> upstream/main
 ---
 
 <script type="module">

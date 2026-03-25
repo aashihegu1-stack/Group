@@ -308,6 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function getCredentials() {
         try {
+<<<<<<< HEAD
             const res = await fetch(`${pythonURI}/api/id`, {
                 ...fetchOptions,
                 method: "GET",
@@ -315,6 +316,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Content-Type": "application/json"
                 },
             });
+=======
+            const res = await fetch(`${pythonURI}/api/id`, fetchOptions );
+>>>>>>> upstream/main
 
             if (res.ok) {
                 const data = await res.json();
@@ -339,9 +343,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const res = await fetch(`${javaURI}/api/stats`, {
                 ...fetchOptions,
                 method: "POST",
+<<<<<<< HEAD
                 headers: {
                     "Content-Type": "application/json"
                 },
+=======
+>>>>>>> upstream/main
                 body: JSON.stringify({
                     "username": username,
                     "module": module,
@@ -363,6 +370,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function getCredentials() {
         try {
+<<<<<<< HEAD
             const res = await fetch(`${pythonURI}/api/id`, {
                 ...fetchOptions,
                 method: "GET",
@@ -370,6 +378,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Content-Type": "application/json"
                 },
             });
+=======
+            const res = await fetch(`${pythonURI}/api/id`, fetchOptions ); 
+>>>>>>> upstream/main
 
             if (res.ok) {
                 const data = await res.json();
@@ -402,9 +413,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const res = await fetch(`${javaURI}/api/stats/grade`, {
                 ...fetchOptions,
                 method: "POST",
+<<<<<<< HEAD
                 headers: {
                     "Content-Type": "application/json"
                 },
+=======
+>>>>>>> upstream/main
                 body: JSON.stringify({ 
                     "username": name, 
                     "module": module, 

@@ -1,7 +1,11 @@
 ---
 layout: opencs
 title: Snake Game
+<<<<<<< HEAD
 permalink: /snake/
+=======
+permalink: /snake
+>>>>>>> upstream/main
 ---
 
 <style>
@@ -71,7 +75,10 @@ permalink: /snake/
 <h2>Snake</h2>
 <div class="container">
     <p class="fs-4">Score: <span id="score_value">0</span></p>
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/main
     <div class="container bg-secondary" style="text-align:center;">
         <!-- Main Menu -->
         <div id="menu" class="py-4 text-light">
@@ -366,4 +373,8 @@ permalink: /snake/
             if(wall === 1){screen_snake.style.borderColor = "#FFFFFF";}
         }
     })();
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> upstream/main
