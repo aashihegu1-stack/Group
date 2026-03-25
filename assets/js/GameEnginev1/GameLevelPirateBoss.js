@@ -3,7 +3,87 @@ import Player from './essentials/Player.js';
 import Character from './essentials/Character.js';
 import Npc from './essentials/Npc.js';
 
+// ── Boss character─────────────────────
+class BlackbreadBoss extends Character {
+    constructor(data, gameEnv) {
+        super(data, gameEnv);
+        this.velocity    = { x: 0, y: 0 };
+        this.speed       = data.SPEED || 1.0;
+        this.patrolAngle = 0;
+        this.attackTimer = 0;
+        this.attackCycle = 180;
+        this.cannonballs = [];
+    }
+
+    update() {
+        const W = this.gameEnv.innerWidth;
+        const H = this.gameEnv.innerHeight;
+
+        // Orbit the centre of the screen
+        this.patrolAngle += 0.010;
+        const r = Math.min(W, H) * 0.28;
+        this.position.x = W / 2 + Math.cos(this.patrolAngle) * r - (this.width  || 80)  / 2;
+        this.position.y = H / 2 + Math.sin(this.patrolAngle) * r - (this.height || 100) / 2;
+
+        // Fire cannonballs toward the player
+        this.attackTimer++;
+        if (this.attackTimer >= this.attackCycle) {
+            this.attackTimer = 0;
+            this._fire();
+        }
+
+        this._tickCannonballs();
+        this.draw();
+    }
+
+    _fire() {
+        let player = null;
+        this.gameEnv.gameObjects?.forEach(o => {
+            if (o?.constructor?.name === 'Player') player = o;
+        });
+        if (!player?.position) return;
+
+        const bx  = this.position.x + (this.width  || 80)  / 2;
+        const by  = this.position.y + (this.height || 100) / 2;
+        const px  = player.position.x + (player.width  || 30) / 2;
+        const py  = player.position.y + (player.height || 40) / 2;
+        const dx  = px - bx, dy = py - by;
+        const mag = Math.sqrt(dx * dx + dy * dy) || 1;
+        const spd = 3.5;
+
+        this.cannonballs.push({ x: bx, y: by, vx: dx / mag * spd, vy: dy / mag * spd, life: 140, r: 9 });
+    }
+
+    _tickCannonballs() {
+        const ctx = this.gameEnv.ctx;
+        const W   = this.gameEnv.innerWidth;
+        const H   = this.gameEnv.innerHeight;
+        ctx.save();
+        for (let i = this.cannonballs.length - 1; i >= 0; i--) {
+            const cb = this.cannonballs[i];
+            cb.x += cb.vx;
+            cb.y += cb.vy;
+            cb.life--;
+            if (cb.life <= 0 || cb.x < 0 || cb.x > W || cb.y < 0 || cb.y > H) {
+                this.cannonballs.splice(i, 1);
+                continue;
+            }
+            ctx.beginPath();
+            ctx.arc(cb.x, cb.y, cb.r, 0, Math.PI * 2);
+            ctx.fillStyle = '#ff6600';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(cb.x - cb.vx * 1.5, cb.y - cb.vy * 1.5, cb.r * 0.5, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,140,0,0.3)';
+            ctx.fill();
+        }
+        ctx.restore();
+    }
+}
+
+// ── Level class ───────────────────────────────────────────────────────────────
 class GameLevelPirateBoss {
+    // Sets up the boss fight level: initializes HP bars, HUD elements, sprite configs, and game objects array
     constructor(gameEnv) {
         const path = gameEnv.path;
         this.gameEnv = gameEnv;
@@ -114,126 +194,100 @@ class GameLevelPirateBoss {
         this._nextMessage();
     }
 
-    _nextMessage() {
-        if (this.messageQueue.length === 0) {
-            if (this._msgCallback) { this._msgCallback(); this._msgCallback = null; }
-            return;
-        }
-        this.currentMsg = this.messageQueue.shift();
-        this.msgTimer   = 0;
-        this.state      = 'MESSAGE';
+    // ── helpers ──────────────────────────────────────────────────────────────
+
+    _overlap(ax, ay, aw, ah, bx, by, bw, bh) {
+        return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
     }
 
-    _handleMenuKey(code) {
-        if (this.state === 'MESSAGE') {
-            if (code === 'KeyZ' || code === 'Enter' || code === 'Space') {
-                this._nextMessage();
-            }
-            return;
+    _setPlayerHp(hp) {
+        this.playerHp = Math.max(0, Math.min(this.playerMaxHp, hp));
+        const pct  = this.playerHp / this.playerMaxHp * 100;
+        const fill = document.getElementById('player-hp-fill');
+        const txt  = document.getElementById('player-hp-txt');
+        if (fill) {
+            fill.style.width      = pct + '%';
+            fill.style.background = pct < 25 ? '#dd0000' : pct < 50 ? '#ffaa00' : '#3388ff';
         }
-
-        if (this.state === 'MENU') {
-            if (code === 'ArrowLeft')  this.menuIndex = (this.menuIndex + 3) % 4;
-            if (code === 'ArrowRight') this.menuIndex = (this.menuIndex + 1) % 4;
-            if (code === 'ArrowUp')    this.menuIndex = (this.menuIndex + 2) % 4;
-            if (code === 'ArrowDown')  this.menuIndex = (this.menuIndex + 2) % 4;
-            if (code === 'KeyZ' || code === 'Enter') {
-                this._selectMenu();
-            }
-        }
+        if (txt) txt.textContent = Math.round(this.playerHp) + ' / ' + this.playerMaxHp;
     }
 
-    _selectMenu() {
-        const opts = ['FIGHT', 'ACT', 'ITEM', 'MERCY'];
-        const choice = opts[this.menuIndex];
-
-        if (choice === 'FIGHT') {
-            const dmg = this.bossPhase === 3 ? 8 + Math.floor(Math.random()*8)
-                      : this.bossPhase === 2 ? 14 + Math.floor(Math.random()*10)
-                                              : 20 + Math.floor(Math.random()*12);
-            this.bossHp = Math.max(0, this.bossHp - dmg);
-            const hitMsgs = [
-                `* McArchie slashes with the cutlass!`,
-                `* Blackbread took ${dmg} damage!`
-            ];
-            if (this.bossHp <= 0) {
-                this._queueMessages([
-                    `* McArchie strikes the finishing blow!`,
-                    `* Blackbread staggers back...`,
-                    `* "...Well played, ye scurvy dog."`,
-                    `* BLACKBREAD was defeated!`
-                ], () => { this.state = 'WIN'; });
-            } else {
-                this._queueMessages(hitMsgs, () => { this._startBossTurn(); });
-            }
-
-        } else if (choice === 'ACT') {
-            const acts = [
-                '* McArchie checks Blackbread.\n* He looks weakened but furious.',
-                '* McArchie taunts the pirate!\n* Blackbread\'s ATTACK fell a little!',
-                '* McArchie compliments the hat.\n* Blackbread is briefly flattered...',
-            ];
-            const msg = acts[Math.floor(Math.random() * acts.length)];
-            this._queueMessages([msg], () => { this._startBossTurn(); });
-
-        } else if (choice === 'ITEM') {
-            if (!this.itemUsed) {
-                this.itemUsed = true;
-                const heal = 40;
-                this.playerHp = Math.min(this.playerMaxHp, this.playerHp + heal);
-                this._queueMessages([
-                    `* McArchie used a Grog Flask!`,
-                    `* Recovered ${heal} HP!`
-                ], () => { this._startBossTurn(); });
-            } else {
-                this._queueMessages(['* No items left!'], () => { this.state = 'MENU'; });
-            }
-
-        } else if (choice === 'MERCY') {
-            const mercyMsgs = [
-                '* McArchie tries to spare Blackbread.',
-                '* "SPARE?! I\'m BLACKBREAD! I spare NO ONE!"',
-                '* The fight continues...'
-            ];
-            this._queueMessages(mercyMsgs, () => { this._startBossTurn(); });
+    _setBossHp(hp) {
+        this.bossHp = Math.max(0, hp);
+        const pct  = this.bossHp / this.bossMaxHp * 100;
+        const fill = document.getElementById('boss-hp-fill');
+        const txt  = document.getElementById('boss-hp-txt');
+        const lbl  = document.getElementById('boss-phase-lbl');
+        if (fill) {
+            fill.style.width      = pct + '%';
+            fill.style.background =
+                this.bossPhase === 3 ? '#cc00ff' :
+                this.bossPhase === 2 ? '#ff6600' : '#dd2200';
         }
+        if (txt) txt.textContent = Math.round(this.bossHp) + ' / ' + this.bossMaxHp;
+        if (lbl) lbl.textContent =
+            this.bossPhase === 3 ? 'Phase III — ENRAGED' :
+            this.bossPhase === 2 ? 'Phase II — Aggressive' : 'Phase I';
     }
 
-    _startBossTurn() {
-        this.turnCount++;
-        this._checkPhase();
-
-        // centre soul in box at start of dodge phase
-        const W = this.canvas.width, H = this.canvas.height;
-        this.box.x = W / 2 - this.box.w / 2;
-        this.box.y = H / 2 - this.box.h / 2 + 20;
-        this.soulX = this.box.x + this.box.w / 2;
-        this.soulY = this.box.y + this.box.h / 2;
-
-        this.bullets      = [];
-        this.attackActive = true;
-        this.attackTimer  = 0;
-        this.state        = 'BOSS_TURN';
-
-     
-        const patterns = this.bossPhase === 1 ? [0, 1]
-                       : this.bossPhase === 2 ? [0, 1, 2]
-                                              : [0, 1, 2, 3];
-        this.currentPattern = patterns[this.attackIndex % patterns.length];
-        this.attackIndex++;
-
-        const flavour = [
-            '* Blackbread fires his cannons!',
-            '* Blackbread swings his cutlass!',
-            '* Blackbread calls the storm!',
-            '* Blackbread UNLEASHES his rage!'
-        ];
-        this.currentMsg = flavour[this.currentPattern] || flavour[0];
+    _flash(msg) {
+        const el = document.getElementById('boss-flash');
+        if (!el) return;
+        el.textContent   = msg;
+        el.style.opacity = '1';
+        clearTimeout(this._flashTimer);
+        this._flashTimer = setTimeout(() => { el.style.opacity = '0'; }, 2200);
     }
 
-    _checkPhase() {
-        const ratio = this.bossHp / this.bossMaxHp;
-        const newPhase = ratio > 0.66 ? 1 : ratio > 0.33 ? 2 : 3;
+    _showResult(won) {
+        this.wonGame = true;
+        const popup = document.getElementById('boss-popup');
+        if (!popup) return;
+        popup.innerHTML = won ? `
+            <div style="font-size:52px;margin-bottom:8px;">☠️🦜</div>
+            <div style="color:#f5d060;font-size:26px;font-weight:bold;margin-bottom:12px;">Victory!</div>
+            <div style="color:#c8e8c8;font-size:15px;line-height:1.9;margin-bottom:22px;">
+                McArchie defeats Blackbread!<br>
+                <span style="color:#ff8844;">The seas belong to you now.</span>
+            </div>
+            <button id="boss-popup-btn" style="background:#6b3d00;color:#f5d060;border:2px solid #c8a44a;padding:11px 28px;font-size:16px;font-family:Georgia,serif;border-radius:8px;cursor:pointer;">Close ✕</button>
+        ` : `
+            <div style="font-size:52px;margin-bottom:8px;">💀</div>
+            <div style="color:#cc3300;font-size:26px;font-weight:bold;margin-bottom:12px;">Defeated!</div>
+            <div style="color:#ffaaaa;font-size:15px;line-height:1.9;margin-bottom:22px;">
+                Blackbread crushes McArchie...<br>
+                <span style="color:#aaaaaa;">Return when you are stronger.</span>
+            </div>
+            <button id="boss-popup-btn" style="background:#3d0000;color:#ffaaaa;border:2px solid #8b0000;padding:11px 28px;font-size:16px;font-family:Georgia,serif;border-radius:8px;cursor:pointer;">Close ✕</button>
+        `;
+        popup.style.display = 'block';
+        document.getElementById('boss-popup-btn').onclick = () => {
+            popup.style.display = 'none';
+        };
+    }
+
+    // ── main update called every frame by the engine ──────────────────────────
+    update() {
+        if (!this.gameEnv?.gameObjects || this.wonGame) return;
+
+        let player = null;
+        let boss   = null;
+
+        this.gameEnv.gameObjects.forEach(obj => {
+            if (obj?.constructor?.name === 'Player') player = obj;
+            if (obj instanceof BlackbreadBoss)       boss   = obj;
+        });
+
+        if (!player?.position || !boss?.position) return;
+
+        const px = player.position.x, py = player.position.y;
+        const pw = player.width  || 30,  ph = player.height || 40;
+        const bx = boss.position.x,      by = boss.position.y;
+        const bw = boss.width    || 80,  bh = boss.height   || 100;
+
+        // ── Phase transitions ─────────────────────────────────────────────
+        const ratio    = this.bossHp / this.bossMaxHp;
+        const newPhase = ratio > 0.6 ? 1 : ratio > 0.3 ? 2 : 3;
         if (newPhase !== this.bossPhase) {
             this.bossPhase = newPhase;
             const msgs = newPhase === 2
@@ -608,9 +662,12 @@ class GameLevelPirateBoss {
         this._render();
     }
 
+    // Placeholder for canvas draw — rendering is handled by individual game objects
     draw()   {}
+    // Placeholder for window resize — layout adjusts automatically via CSS
     resize() {}
 
+    // Cleans up all HUD elements from the DOM and removes the global sword flag
     destroy() {
         window.removeEventListener('keydown', this._keyDown);
         window.removeEventListener('keyup',   this._keyUp);

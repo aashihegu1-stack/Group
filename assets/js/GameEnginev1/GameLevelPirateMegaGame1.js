@@ -4,6 +4,7 @@ import Player from './essentials/Player.js';
 import FloorItem from './FloorItem.js';
 
 class GameLevelPirateMegaGame1 {
+  // Sets up the cookie collection level with UI overlays, background, player, and 5 floor item cookies
   constructor(gameEnv, game) {
     this.gameEnv = gameEnv;
     this.gameControl = game;
@@ -123,6 +124,7 @@ class GameLevelPirateMegaGame1 {
     this.cookies.push(new FloorItem(width * 0.9, height * 0.8, cookieItem));
   }
 
+  // Called every frame — updates player, checks cookie collisions, increments score, and shows success popup at 5
   update() {
     if (this.player) this.player.update();
     for (let i = this.cookies.length - 1; i >= 0; i--) {
@@ -140,6 +142,7 @@ class GameLevelPirateMegaGame1 {
     }
   }
 
+  // Returns true if the player's bounding box overlaps with a cookie's 50x50 hitbox using AABB detection
   checkCollision(player, cookie) {
     if (!player || !cookie) return false;
     return !( (player.position.x + player.width) < cookie.x || 
@@ -148,11 +151,13 @@ class GameLevelPirateMegaGame1 {
                player.position.y > (cookie.y + 50));
   }
 
+  // Renders the background and player sprites to the canvas each frame
   draw() {
     if (this.background) this.background.draw();
     if (this.player) this.player.draw();
   }
 
+  // Delegates resize to background and player so sprites scale with the window
   resize() {
     if (this.background) this.background.resize();
     if (this.player) this.player.resize();

@@ -3,6 +3,7 @@ import Player from './essentials/Player.js';
 import Npc from './essentials/Npc.js';
 
 class GameLevelPirateHunt {
+    // Initializes the pirate hunt level with background, player, NPCs, and the heist checklist UI
     constructor(gameEnv) {
         console.log("Initializing GameLevelPirate...");
 
@@ -41,6 +42,7 @@ class GameLevelPirateHunt {
         `;
         document.body.appendChild(checklistEl);
 
+        // Marks a checklist item as collected by updating its text, style, and dataset flag
         function checkOff(id, label) {
             const el = document.getElementById(id);
             if (el && !el.dataset.collected) {
@@ -222,6 +224,7 @@ class GameLevelPirateHunt {
         ];
     }
 
+    // Removes the heist checklist UI element from the DOM when the level is destroyed
     destroy() {
         if (this.checklistEl) {
             this.checklistEl.remove();
