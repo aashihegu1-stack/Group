@@ -3,15 +3,9 @@ title: Analytics Help
 permalink: /dashboard/help/analytics
 ---
 
-<<<<<<< HEAD
-# Analytics Help
-
-## Overview
-=======
 ## Analytics Help
 
 ### Overview
->>>>>>> upstream/main
 
 - The Nighthawk Coders' portfolio dashboard visualizes your GitHub activity and predicts grades based on real contributions.
 

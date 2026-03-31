@@ -168,14 +168,6 @@ class DocxConverter:
             
         return images_found
 
-<<<<<<< HEAD
-    def clean_markdown(self, markdown_text):
-        """Clean and format markdown text"""
-        # Remove extra whitespace
-        markdown_text = re.sub(r'\n\s*\n\s*\n', '\n\n', markdown_text)
-        
-        # Fix heading spacing
-=======
     def fix_toc_links(self, markdown_text):
         """Fix Table of Contents links from Word bookmark IDs to markdown anchors"""
         
@@ -336,7 +328,6 @@ class DocxConverter:
         markdown_text = re.sub(r'\n\s*\n\s*\n', '\n\n', markdown_text)
         
         # Fix heading spacing (now handles H2-H6)
->>>>>>> upstream/main
         markdown_text = re.sub(r'\n(#{1,6})', r'\n\n\1', markdown_text)
         markdown_text = re.sub(r'(#{1,6}.*?)\n([^\n#])', r'\1\n\n\2', markdown_text)
         

@@ -35,9 +35,6 @@ Topics:
       - "Resolve Python symlinks"
       - "Verify with version checks"
     subtitle: "Apple Terminal + Brew"
-<<<<<<< HEAD
-    description: "MacOS is Unix-based and supports Linux commands natively. After installing Homebrew, you’ll run a setup script to configure Python, Ruby, Jupyter, and more. Custom symlinks are used to ensure tools work properly across Intel and Apple Silicon Macs. You'll use the Terminal for cloning, installing, and verifying your setup."
-=======
     description: "MacOS is Unix-based and supports Linux commands natively. After installing Homebrew, you’ll run a setup script to configure Python, Ruby, Jupyter, and more. Custom symlinks are used to ensure tools work properly across Intel and Apple Silicon Macs. You'll use the Terminal for cloning, installing, and verifying your setup."
 
   - title: "Linux"
@@ -51,4 +48,3 @@ Topics:
       - "Verify with version checks"
     subtitle: "Linux Terminal + Apt"
     description: "Linux users can leverage their native terminal and package manager (apt etc.) to set up a development environment. By running the provided setup scripts, you can quickly install Python, and other essential tools for coding and data science."
->>>>>>> upstream/main

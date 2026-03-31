@@ -83,12 +83,8 @@ Check if this is a course lesson and determine which course context to use
           {% for week in (sprint.start..sprint.end) %}
           {% for post in posts %}
           {% if post.courses[current_course] %}
-<<<<<<< HEAD
-          {% comment %}Include all files with courses frontmatter (including converted notebook markdown files){% endcomment %}
-=======
           {% comment %}Include all files with courses frontmatter (including converted notebook markdown files){%
           endcomment %}
->>>>>>> upstream/main
           {% comment %}Skip files with multiple courses - they should use course-specific versions{% endcomment %}
           {% assign course_count = 0 %}
           {% for course in post.courses %}
@@ -117,34 +113,20 @@ Check if this is a course lesson and determine which course context to use
   <!-- MAIN CONTENT -->
   <div class="lesson-main">
     <!-- Top Bar -->
-<<<<<<< HEAD
-    <div class="lesson-topbar">
-      <div class="topbar-actions">
-        <a href="{{ site.baseurl }}/navigation/courses/{{ current_course }}" class="back-btn">
-          <i class="fas fa-arrow-left"></i>
-          Sprint View
-        </a>
-        <div class="breadcrumbs">
-          <i class="fas fa-home"></i>
-=======
     <div class="topbar-lesson">
       <div class="topbar-left">
         <div class="breadcrumbs">
           <a href="{{ site.baseurl }}/navigation/courses/{{ current_course }}">
             <i class="fas fa-home"></i>
           </a>
->>>>>>> upstream/main
           <i class="fas fa-chevron-right"></i>
           <span>Week {{ current_week }}</span>
           <i class="fas fa-chevron-right"></i>
           <span class="current">{{ page.title }}</span>
-<<<<<<< HEAD
-=======
           <button id="topbar-complete-btn" onclick="toggleComplete()">
             <i class="fas fa-circle" id="complete-icon-topbar"></i>
             <span id="complete-text-topbar">Burndown</span>
           </button>
->>>>>>> upstream/main
         </div>
       </div>
       <div class="topbar-progress">
@@ -179,14 +161,11 @@ Check if this is a course lesson and determine which course context to use
 
           {{ content }}
 
-<<<<<<< HEAD
-=======
           {% if page.show_gist_export %}
           {% comment %} Only show the export button when the notebook explicitly requests it {% endcomment %}
           {% include gist-export-button.html %}
           {% endif %}
 
->>>>>>> upstream/main
           {% if page.assignment %}
           <div class="assignment-submission">
             <h3>
@@ -255,27 +234,6 @@ Check if this is a course lesson and determine which course context to use
         {%- endif -%}
       </div>
     </div>
-<<<<<<< HEAD
-
-    <!-- Bottom Navigation -->
-    <div class="lesson-bottom">
-      <div class="lesson-bottom-inner">
-        <div class="bottom-actions">
-          <button class="btn btn-outline" id="complete-btn" onclick="toggleComplete()">
-            <i class="fas fa-circle" id="complete-icon"></i>
-            <span id="complete-text">Mark Complete</span>
-          </button>
-        </div>
-        <button class="btn btn-primary" onclick="nextLesson()">
-          Next
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-=======
 </div>
 
 {% if page.challenge_submit %}
@@ -303,7 +261,6 @@ Check if this is a course lesson and determine which course context to use
 </script>
 {% endif %}
 
->>>>>>> upstream/main
 <!-- Floating hamburger menu (mobile only) -->
 <button class="floating-menu-btn" id="floating-menu-btn" style="display: none;">
   <i class="fas fa-bars"></i>
@@ -393,24 +350,6 @@ Check if this is a course lesson and determine which course context to use
     const completionData = loadCompletionData();
     const isCompleted = completionData[currentLessonId] || false;
 
-<<<<<<< HEAD
-    const icon = document.getElementById('complete-icon');
-    const text = document.getElementById('complete-text');
-
-    if (icon && text) {
-      if (isCompleted) {
-        icon.classList.remove('fa-circle');
-        icon.classList.add('fa-circle-check');
-        text.textContent = 'Completed';
-      } else {
-        icon.classList.remove('fa-circle-check');
-        icon.classList.add('fa-circle');
-        text.textContent = 'Burndown';
-      }
-    }
-  }
-
-=======
     // Helper to update specific button elements
     const updateBtnElements = (iconId, textId) => {
         const icon = document.getElementById(iconId);
@@ -435,7 +374,6 @@ Check if this is a course lesson and determine which course context to use
     // Update topbar button
     updateBtnElements('complete-icon-topbar', 'complete-text-topbar');
   }
->>>>>>> upstream/main
   // Update UI based on completion data
   function updateUI() {
     const completionData = loadCompletionData();
@@ -474,8 +412,6 @@ Check if this is a course lesson and determine which course context to use
     }
   }
 
-<<<<<<< HEAD
-=======
   window.prevLesson = function () {
     const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
     const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
@@ -487,7 +423,6 @@ Check if this is a course lesson and determine which course context to use
     }
   }
 
->>>>>>> upstream/main
   // Next lesson navigation
   window.nextLesson = function () {
     const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
@@ -730,17 +665,7 @@ Check if this is a course lesson and determine which course context to use
   // NOTE: This getUid function is duplicated from admin_foundation.html logic
   async function getUid() {
     try {
-<<<<<<< HEAD
-      const res = await fetch(`${pythonURI}/api/id`, {
-        ...fetchOptions,
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        },
-      });
-=======
       const res = await fetch(`${pythonURI}/api/id`, fetchOptions);
->>>>>>> upstream/main
 
       if (res.ok) {
         const data = await res.json();
@@ -788,11 +713,7 @@ Check if this is a course lesson and determine which course context to use
         ...submissionData
       };
 
-<<<<<<< HEAD
-      const res = await fetch(`${javaURI}/api/grades`, { 
-=======
       const res = await fetch(`${javaURI}/api/grades`, {
->>>>>>> upstream/main
         ...fetchOptions,
         method: "POST",
         headers: {
@@ -1622,9 +1543,6 @@ Check if this is a course lesson and determine which course context to use
   {%- include disqus_comments.html -%}
   {%- endif -%}
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
-<<<<<<< HEAD
-  
-=======
 
   <!-- Enhanced Analytics Tracking -->
   <script type="module">
@@ -1636,7 +1554,6 @@ Check if this is a course lesson and determine which course context to use
   <script src="{{ site.baseurl }}/assets/js/code-runner-analytics.js"></script>
   <script src="{{ site.baseurl }}/assets/js/lesson-completion.js"></script>
   <script src="{{ site.baseurl }}/assets/js/lesson-completion-bigsix.js"></script>
->>>>>>> upstream/main
 </article>
 
 {% endif %}

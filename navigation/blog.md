@@ -1,11 +1,6 @@
 ---
 layout: blogs 
 title: Blogs
-<<<<<<< HEAD
-search_exclude: true
-permalink: /blogs/
----
-=======
 description: This page contains reference materials, learning resources, and course content for Computer Science Education programs including CSSE, AP Computer Science Principles, and AP Computer Science A.
 search_exclude: true
 permalink: /navigation/blogs/
@@ -90,4 +85,3 @@ permalink: /navigation/blogs/
 </script>
 
 ## Course Materials
->>>>>>> upstream/main

@@ -9,11 +9,7 @@ class GameLevelParallaxFish {
     let path = gameEnv.path;
 
     // Background data
-<<<<<<< HEAD
-    const image_src_reef = path + "/images/gamify/bg/reef.png"; // be sure to include the path
-=======
     const image_src_reef = path + "/images/platformer/backgrounds/reef.png"; // be sure to include the path
->>>>>>> upstream/main
     const image_data_reef = {
         name: 'reef',
         greeting: "Welcome to the reef!  It is vibrant and full of life, but there are many adventures to be had!",
@@ -21,11 +17,7 @@ class GameLevelParallaxFish {
         pixels: {height: 360, width: 643}
     };
 
-<<<<<<< HEAD
-    const image_src_school_fish = path + "/images/gamify/bg/school-fish.png";
-=======
     const image_src_school_fish = path + "/images/platformer/backgrounds/school-fish.png";
->>>>>>> upstream/main
     const image_data_school_fish = {
         name: 'school-fish',
         greeting: "A school of fish swims by, adding to the lively atmosphere of the reef.",

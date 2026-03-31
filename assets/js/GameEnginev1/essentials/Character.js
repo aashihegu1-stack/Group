@@ -11,7 +11,7 @@ const PIXELS = {height: 16, width: 16};
  * Character is a dynamic class that manages the data and events for objects like player and NPCs.
  * 
  * The focus of this class is to handle the object's state, rendering, and key events.
- * 
+ * j
  * This class uses a classic Java class pattern which is nice for managing object data and events.
  * 
  * The classic Java class pattern provides a structured way to define the properties and methods
@@ -420,8 +420,4 @@ class Character extends GameObject {
     
 }
 
-<<<<<<< HEAD
 export default Character;
-=======
-export default Character;
->>>>>>> upstream/main

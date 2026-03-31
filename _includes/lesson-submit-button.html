@@ -256,20 +256,12 @@
                 return;
             }
 
-<<<<<<< HEAD
-            // Update UI
-=======
->>>>>>> upstream/main
             submitBtn.disabled = true;
             statusSpan.textContent = `⏳ Submitting ${count} challenges...`;
             statusSpan.className = 'submit-status loading';
 
             try {
                 const response = await fetch(`${javaURI}/api/challenge-submission/submit`, {
-<<<<<<< HEAD
-                    ...fetchOptions,
-                    method: 'POST',
-=======
                     method: 'POST',
                     credentials: 'include',
                     headers: {
@@ -277,7 +269,6 @@
                         'Content-Type': 'application/json',
                         'X-Origin': 'client'
                     },
->>>>>>> upstream/main
                     body: JSON.stringify({
                         lessonKey: lessonKey,
                         challenges: challenges

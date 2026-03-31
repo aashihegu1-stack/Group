@@ -22,9 +22,6 @@ _notebooks/CSP/big-ideas/big-idea-3-part-1-fundamentals/Period3/2024-9-27-fundam
 .bundle
 vendor/*
 package-lock.json
-<<<<<<< HEAD
-.jekyll-metadata
-=======
 private/
 .jekyll-metadata
 ijava/
@@ -62,4 +59,3 @@ _notebooks/**/*_csa.md
 _notebooks/**/*_csse.md
 _notebooks/**/*_cwgu.md
 _notebooks/**/*_content.md
->>>>>>> upstream/main

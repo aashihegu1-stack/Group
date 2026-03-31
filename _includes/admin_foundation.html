@@ -433,17 +433,7 @@
 
     async function getCredentials() {
       try {
-<<<<<<< HEAD
-        const res = await fetch(`${pythonURI}/api/id`, {
-          ...fetchOptions,
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          },
-        });
-=======
         const res = await fetch(`${pythonURI}/api/id`, fetchOptions);
->>>>>>> upstream/main
 
         if (res.ok) {
           const data = await res.json();
@@ -460,17 +450,7 @@
 
     async function getGrades() {
       try {
-<<<<<<< HEAD
-        const res = await fetch(`${javaURI}/api/grades`, {
-          ...fetchOptions,
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          },
-        });
-=======
         const res = await fetch(`${javaURI}/api/grades`, fetchOptions );
->>>>>>> upstream/main
 
         if (res.ok) {
           const data = await res.json();
@@ -751,12 +731,6 @@
                 const res = await fetch(`${javaURI}/api/grades`, {
                   ...fetchOptions,
                   method: "PUT",
-<<<<<<< HEAD
-                  headers: {
-                    "Content-Type": "application/json"
-                  },
-=======
->>>>>>> upstream/main
                   body: JSON.stringify({
                     uid: uid,
                     title: title,

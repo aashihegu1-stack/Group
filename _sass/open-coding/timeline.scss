@@ -382,8 +382,6 @@
     color: $text-muted;
   }
 
-<<<<<<< HEAD
-=======
   // Item priority selector wrapper
   .item-priority-selector {
     flex-shrink: 0;
@@ -441,7 +439,6 @@
     }
   }
 
->>>>>>> upstream/main
   .week-goals-container {
     margin-top: 0;
     margin-bottom: 20px;
@@ -869,11 +866,7 @@
     position: relative;
     font-family: 'Crimson Text', serif;
     color: var(--text);
-<<<<<<< HEAD
-=======
     transition: all 0.3s ease;
-
-    &.excellence-theme {
       border-color: #ffd700; // Gold
       box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
       background: linear-gradient(135deg, var(--bg-1) 0%, #fffdf0 100%);
@@ -992,10 +985,8 @@
   .cert-btn-loading {
     opacity: 0.8;
     cursor: wait;
->>>>>>> upstream/main
   }
 
-  #certificate-content::before {
     content: '';
     position: absolute;
     top: 18px;
@@ -1492,11 +1483,7 @@
     gap: 8px;
   }
 
-<<<<<<< HEAD
-  .sync-sprint-calendar-btn {
-=======
   .advanced-sync-btn {
->>>>>>> upstream/main
     width: 100%;
     padding: 12px 16px;
     background: var(--pref-accent-color);
@@ -1530,40 +1517,7 @@
     }
   }
 
-<<<<<<< HEAD
-  .advanced-sync-btn {
-    width: 100%;
-    padding: 8px 16px;
-    background: transparent;
-    border: 1px solid var(--pref-accent-color);
-    border-radius: 8px;
-    color: var(--pref-accent-color);
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.2s;
-    
-    &:hover {
-      background: rgba(var(--pref-accent-rgb), 0.1);
-    }
-    
-    &:active {
-      transform: scale(0.98);
-    }
-    
-    i {
-      font-size: 11px;
-    }
-  }
-
-  .delete-sprint-calendar-btn {
-=======
   .advanced-remove-btn {
->>>>>>> upstream/main
     width: 100%;
     padding: 10px 16px;
     background: #dc2626;
@@ -1598,38 +1552,6 @@
     }
   }
 
-<<<<<<< HEAD
-  .advanced-remove-btn {
-    width: 100%;
-    padding: 8px 16px;
-    background: transparent;
-    border: 1px solid #dc2626;
-    border-radius: 8px;
-    color: #dc2626;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.2s;
-    
-    &:hover {
-      background: rgba(220, 38, 38, 0.1);
-    }
-    
-    &:active {
-      transform: scale(0.98);
-    }
-    
-    i {
-      font-size: 11px;
-    }
-  }
-
-=======
->>>>>>> upstream/main
   .sprint-date-status {
     margin-top: 12px;
     font-size: 12px;
@@ -1908,44 +1830,27 @@
 
   .calendar-action-modal-footer {
     display: flex;
-<<<<<<< HEAD
-    justify-content: flex-end;
-    gap: 12px;
-=======
     justify-content: stretch;
     gap: 10px;
->>>>>>> upstream/main
     padding: 16px 24px;
     border-top: 1px solid $bg-3;
     flex-shrink: 0;
   }
 
   .modal-btn {
-<<<<<<< HEAD
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-=======
     flex: 1;
     padding: 10px 14px;
     border-radius: 8px;
     font-size: 13px;
->>>>>>> upstream/main
     font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
-<<<<<<< HEAD
-    gap: 8px;
-    transition: all 0.2s;
-    border: none;
-=======
     justify-content: center;
     gap: 6px;
     transition: all 0.2s;
     border: none;
     white-space: nowrap;
->>>>>>> upstream/main
 
     &.primary {
       background: var(--pref-accent-color);
@@ -1971,8 +1876,6 @@
       }
     }
 
-<<<<<<< HEAD
-=======
     &.export-blue {
       background: #3b82f6;
       color: white;
@@ -1982,7 +1885,6 @@
       }
     }
 
->>>>>>> upstream/main
     &.danger {
       background: #dc2626;
       color: white;
@@ -1996,8 +1898,6 @@
         cursor: not-allowed;
       }
     }
-<<<<<<< HEAD
-=======
 
     &.info {
       background: #0ea5e9;
@@ -2165,7 +2065,6 @@
     &.update {
       color: #f59e0b;
     }
->>>>>>> upstream/main
   }
 
   .sync-modal-sprint-info {
@@ -2556,8 +2455,6 @@
     }
   }
 
-<<<<<<< HEAD
-=======
   // Individual item priority selector
   .item-priority-select {
     padding: 3px 6px;
@@ -2672,7 +2569,6 @@
     }
   }
 
->>>>>>> upstream/main
   // Summary
   .sync-summary {
     margin-top: 16px;
@@ -2837,8 +2733,6 @@
     left: 16px;
     max-width: none;
   }
-<<<<<<< HEAD
-=======
 }
 
 /* ============================= */
@@ -2914,5 +2808,4 @@
       border-color: #16a34a !important;
     }
   }
->>>>>>> upstream/main
 }

@@ -29,12 +29,9 @@ CODE_RUNNER_PATTERNS = {
 # UI_RUNNER pattern for HTML cells
 UI_RUNNER_PATTERN = r'^<!--\s*UI_RUNNER:\s*(.+)\s*-->$'
 
-<<<<<<< HEAD
-=======
 # GAME_RUNNER pattern for GameEngine cells (JavaScript only)
 GAME_RUNNER_PATTERN = r'^//\s*GAME_RUNNER:\s*(.+)$'
 
->>>>>>> upstream/main
 def error_cleanup(notebook_file):
     destination_file = os.path.basename(notebook_file).replace(".ipynb", "_IPYNB_2_.md")
     destination_path = os.path.join(destination_directory, destination_file)
@@ -213,8 +210,6 @@ def extract_ui_runner_metadata(cell_source):
     return None
 
 
-<<<<<<< HEAD
-=======
 def extract_game_runner_metadata(cell_source):
     """Extract GAME_RUNNER challenge and options from JavaScript cell comments
     
@@ -283,7 +278,6 @@ def clean_game_code(cell_source):
     return result
 
 
->>>>>>> upstream/main
 def clean_html_for_runner(cell_source, runner_index):
     """Clean HTML cell and make IDs unique"""
     lines = cell_source.split('\n')
@@ -359,8 +353,6 @@ def process_ui_runner_cells(notebook, permalink):
     return notebook
 
 
-<<<<<<< HEAD
-=======
 def process_game_runner_cells(notebook, permalink):
     """Process notebook cells and add game-runner metadata"""
     runner_index = 0
@@ -395,7 +387,6 @@ def process_game_runner_cells(notebook, permalink):
     return notebook
 
 
->>>>>>> upstream/main
 def inject_code_runners(markdown, notebook, front_matter=None):
     """Inject code-runner includes after code blocks with metadata
     
@@ -521,8 +512,6 @@ def inject_code_runners(markdown, notebook, front_matter=None):
                     result.append('%}')                
                     result.append('')
                     code_runner_count += 1
-<<<<<<< HEAD
-=======
                 # Add game-runner if metadata exists
                 elif code_cell and 'game_runner' in code_cell.get('metadata', {}):
                     runner_data = code_cell['metadata']['game_runner']
@@ -553,7 +542,6 @@ def inject_code_runners(markdown, notebook, front_matter=None):
                     result.append('%}')                
                     result.append('')
                     code_runner_count += 1
->>>>>>> upstream/main
                 else:
                     # Regular code block without code-runner
                     result.extend(code_block_content)                
@@ -593,12 +581,9 @@ def convert_notebook_to_markdown_with_front_matter(notebook_file):
         # Process ui runner cells before conversion
         notebook = process_ui_runner_cells(notebook, permalink)
         
-<<<<<<< HEAD
-=======
         # Process game runner cells before conversion
         notebook = process_game_runner_cells(notebook, permalink)
         
->>>>>>> upstream/main
         process_mermaid_cells(notebook)
         exporter = MarkdownExporter()
         markdown, _ = exporter.from_notebook_node(notebook)

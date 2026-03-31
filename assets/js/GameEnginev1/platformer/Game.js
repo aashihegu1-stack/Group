@@ -320,11 +320,7 @@ class Game {
         
         // Victory link button
         const victoryLink = document.createElement('a');
-<<<<<<< HEAD
-        victoryLink.href = '../../../../gamify/end'; 
-=======
         victoryLink.href = '../../../../gamify/end'; // this could be ../../../../navigation/adventureGame/end.md but that gave me the pretty print bs so idrk
->>>>>>> upstream/main
         victoryLink.target = '_blank';
         victoryLink.textContent = 'Claim Elytra & Return →';
         victoryLink.style.cssText = `

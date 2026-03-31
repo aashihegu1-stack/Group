@@ -24,27 +24,18 @@
     // Analytics session state
     let analyticsState = {
         sessionStartTime: new Date(),
-<<<<<<< HEAD
-=======
         lastSubmitTime: new Date(), // Track last submission time for duration calculation
->>>>>>> upstream/main
         sessionEndTime: null,
         questName: null,
         moduleName: null,
         lessonNumber: null,
         pageTitle: null,
         pageUrl: window.location.href,
-<<<<<<< HEAD
-        
-        // Counters
-        lessonsViewed: new Set(),
-=======
         maxScrollDepth: 0, // Track maximum scroll depth reached
         
         // Counters
         lessonsViewed: new Set(),
         lessonsCompleted: 0, // Track lessons marked as complete
->>>>>>> upstream/main
         modulesViewed: new Set(),
         videosWatched: 0,
         videosCompleted: 0,
@@ -125,8 +116,6 @@
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Hook into the toggleComplete function to track lesson completion
      * This is called from the #complete-btn button in the lesson player
      */
@@ -143,7 +132,6 @@
     }
 
     /**
->>>>>>> upstream/main
      * Track copy-paste attempts
      */
     function trackCopyPaste() {
@@ -173,8 +161,6 @@
         document.addEventListener('click', function(e) {
             analyticsState.mouseClicksCount++;
             
-<<<<<<< HEAD
-=======
             // Track code execution button clicks - catches all variations
             if (e.target.closest('[data-action="run"]') ||
                 e.target.closest('.run-btn') ||
@@ -193,7 +179,6 @@
                 debug('Code execution button clicked');
             }
             
->>>>>>> upstream/main
             // Track video clicks
             if (e.target.tagName === 'VIDEO' || 
                 e.target.closest('video') ||
@@ -233,10 +218,6 @@
             const documentHeight = document.documentElement.scrollHeight;
             const scrollTop = window.scrollY;
             
-<<<<<<< HEAD
-            const scrollPercent = (scrollTop + windowHeight) / documentHeight;
-            analyticsState.scrollDepthPercentage = Math.round(scrollPercent * 100);
-=======
             // Calculate how far down the user has scrolled (0-100%)
             const scrollPercent = Math.min(100, Math.round((scrollTop + windowHeight) / documentHeight * 100));
             
@@ -245,7 +226,6 @@
                 analyticsState.maxScrollDepth = scrollPercent;
                 analyticsState.scrollDepthPercentage = scrollPercent;
             }
->>>>>>> upstream/main
         }, { passive: true });
     }
 
@@ -357,12 +337,6 @@
      */
     function preparePayload() {
         const now = new Date();
-<<<<<<< HEAD
-        const durationSeconds = Math.round((now - analyticsState.sessionStartTime) / 1000);
-        
-        return {
-            sessionStartTime: analyticsState.sessionStartTime.toISOString(),
-=======
         // Calculate duration only since last submission, not from session start
         const durationSeconds = Math.round((now - analyticsState.lastSubmitTime) / 1000);
         
@@ -381,7 +355,6 @@
         
         return {
             sessionStartTime: analyticsState.lastSubmitTime.toISOString(),
->>>>>>> upstream/main
             sessionEndTime: now.toISOString(),
             sessionDurationSeconds: durationSeconds,
             
@@ -394,10 +367,7 @@
             
             // User actions
             lessonsViewed: analyticsState.lessonsViewed.size,
-<<<<<<< HEAD
-=======
             lessonsCompleted: analyticsState.lessonsCompleted,
->>>>>>> upstream/main
             modulesViewed: analyticsState.modulesViewed.size,
             videosWatched: analyticsState.videosWatched,
             videosCompleted: analyticsState.videosCompleted,
@@ -414,10 +384,7 @@
             
             // Engagement
             scrollDepthPercentage: analyticsState.scrollDepthPercentage,
-<<<<<<< HEAD
-=======
             interactionPercentage: interactionPercentage,
->>>>>>> upstream/main
             hoverEventsCount: analyticsState.hoverEventsCount,
             keyboardInputEvents: analyticsState.keyboardInputEvents,
             mouseClicksCount: analyticsState.mouseClicksCount,
@@ -464,8 +431,6 @@
             
             if (response.ok) {
                 debug('Analytics submitted successfully');
-<<<<<<< HEAD
-=======
                 // Reset tracking counters and timers after successful submission
                 analyticsState.lastSubmitTime = new Date();
                 analyticsState.videosWatched = 0;
@@ -486,7 +451,6 @@
                 analyticsState.validationErrors = 0;
                 analyticsState.maxScrollDepth = 0; // Reset scroll depth tracking
                 // Note: Keep lessonsViewed and modulesViewed as they track across session
->>>>>>> upstream/main
             } else {
                 console.warn('Failed to submit analytics:', response.status);
             }
@@ -506,10 +470,7 @@
         extractContentInfo();
         
         // Set up tracking
-<<<<<<< HEAD
-=======
         setupLessonCompletionTracking(); // Hook into toggleComplete() before other tracking
->>>>>>> upstream/main
         trackCopyPaste();
         trackInteractions();
         trackScrollDepth();
