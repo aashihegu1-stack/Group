@@ -1,9 +1,5 @@
 HOST ?= localhost
-<<<<<<< HEAD
-PORT ?= 4599
-=======
 PORT ?= 4500
->>>>>>> upstream/main
 LOG_FILE = /tmp/jekyll$(PORT).log
 PYTHON := venv/bin/python3
 
